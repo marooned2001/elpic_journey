@@ -1,0 +1,30 @@
+101.3 change runlevels/boot targets and shutdown or reboot the system
+runlevel says the system how alive and active is.
+
+systemd
+systemd is is suit of system management daemon and libraries and utilities designed as core building block of Linux os.
+in systemd we have targets those are group of services.
+it's able to isolate any of theme
+
+1. rescue: Local file systems are mounted, no networking, and root-user only (maintenance mode)
+2. emergency: Only the root file system and in read-only mode, No networking and root-user only(maintenance mode)
+3. reboot
+4. halt: Stops all processes and halts CPU activities
+5. poweroff: Like halt but also sends an ACPI shutdown signal (No lights!)
+
+stopping the system 
+when we wanna shut the system or reboot we should notify users and handle users log in. we use "shutdown". it first send warning to every logged in users then blocks every log in to none_root.
+Default is a 1-minute delay and then going to runlevel 1
+-h will halt the system-r will reboot the system
+Time is hh:mm or n (minutes) or now
+Whatever you add, will be broadcasted to logged-in users using the wall command
+If the command is running, ctrl+c or the shutdown -c will cancel it
+
+notifying users
+wall: Sending wall messages to logged-in users
+/etc/issue: Text to be displayed on the tty terminal logins (before login)
+/etc/issue.net: Text to be displayed on the remote terminal logins (before login)
+/etc/motd: Message of the day (after login). Some companies add "Do not enter if you are not allowed" texts here for legal reasons.
+mesg: Command controls if you want to get wall messages or not. You can do mesg n and who -T will show mesg status. Note that shutdown wall messages do not respect the mesg status
+
+--------------------------------------------------------------------------------------------------------------------------------
