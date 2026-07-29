@@ -1,0 +1,32 @@
+101.1 Determine and configure hardware settings
+first i prepare my virtual machine based on ubuntu.
+but for my first lesson know i know something must be a interface between os and my hardware that is firmware and is uefi and in older system bios.
+UEFI is more advanced and supports graphical enviorment. Bios boots the computer by accessing first sector of hard disk or MBR(master boot record). Bios cant read file systems and that's the cous that uses MBR but unlike Bios UEFI can read fat and isted of using boot table uses GPT(guid partition table) that dose't have 512 byte limit and it findes ESP by GPT.In linux we can find it in "/boot/.efi".
+then we have SYSFS that is a pseudo file system that export infos about kernel subsystem, hardware divices and associated device drivers from the kernel's device model to user sapace through virtual files. In another words it's a virtual in memory file system that is istead of containing actual file it is a real time map of computer hardware, devices, drivers, and kernel internals, displayed as folders and text files. we can find it in "/sys/" 
+Then there is "udev". Udev manage divices in "sys/dev/" and read "sys" map and uses those info to manage devices in "/dev" and that make youre sofware comminiucate with hardware and devices.
+Dbus is comminiucating system between apps , operations and system servises.
+then we have proc. Proc is control center of kernel and kernel keeps settings and properties here.
+---------------------------------------------------------------------------------------------------------
+101.2 Boot the system
+boot has 5 general steps:
+1. motherboard firmware does POST(Power On Self Test)
+2. motherboard loads bootloader
+3. bootloader loads kernel(linux) based on it's config
+4. kernel prepare and load root file system and initialization program.
+5. init program starts services.
+
+bootloader
+bootloader initializes the minimum hardware needed for running the system then locates and runs os.
+
+kernel
+kernel is core of operating system. bootloader loads kernel in the memory and runs it. kernel needs some initial info to start like derivers and .... those stored in "initrd" and "initramfs". kernel is able to control to passing parameters by grub. for example : send "1" or "S" => system booting on single core mode.
+
+dmesg
+linux will show booting logs only we need to press "Esc" while booting. After that system booted syslog daemon stores those logs in "/var/log/dmesg".
+we can see them with "dmesg" command but in better way we use "journalctl -k" to see kernel logs and "journalctl -b" to see bootloader log.
+
+var/log/messages
+After the init process comes up, syslog daemon will log messages.
+
+init
+after that kernel fully running now time for init daemon to start other services and daemon and programs.
