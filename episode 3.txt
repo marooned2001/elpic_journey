@@ -1,0 +1,47 @@
+102.1 design hard disk layout
+in Linux we'll have this layout:
+1. root(/)
+2. /var
+3. /home
+4. /boot
+5. ESP(EFI partition system)
+6. swap
+7. mount point
+8. partitions
+In linux unlike windows we dont use C, D, E or etc everything is in huge tree starting with "/"(root) ather partitions and things will be somwhere in this tree.
+Unix directories 
+this layoutes are enheritance from unix and we use it as a standard layout.The most enlightning topic about about linux is understanding FHS(filesysytem hierarchy standdard).
+
+directories and decryption
+bin	Essential command binaries
+boot	static files and bootloader
+dev	device files
+etc	host-specific system configouration 
+home	home directory of user
+lib	essintial shared and kernel modules
+media	mount point for removable media
+mnt	mount point for mounting a filesystem temporarily 
+opt	add-on application software packages
+root	home directory of root user
+sbin	essential system binaries
+srv	data for services provided by this system
+tmp	temporary files (some times purged on each boot)
+usr	secondary hierarchy 
+var	variable data
+
+Partitions
+we know thwe devices are in "/dev" and we have differente files for different types of disks.
+/dev/sda	first SATA disk(whole disk)
+/dev/sda1	first SATA disk partition 1
+/dev/sda2	first SATA disk partition 2
+/dev/sdb	2nd SATA disk(whole disk)
+/dev/sdb1	2nd SATA disk partition 1
+
+commands
+we have some commands for managing disk like "fdisk", "parted" and etc.
+
+lvm
+we can merge few hard disks to one logical disk for example we can make 10 TB hard disk using 10*1TB hard disk.
+
+/swap
+linux uses swap for extending memory for emergency moments and when we have lack of memory instead of crashing we keep going slower. Swap is not capable  for long term use and not a successor for memory because disk is very slower than memory and we just use it for emergancy.
