@@ -1,0 +1,58 @@
+102.2 how to install boot manager
+the binary starts the boot loader. it might be too complete bootloader of system on "/boot/efi" or small loader for grub or widows loader or chain loader.
+chain loading is when we use boot loader to load another boot loader. E.X: a dual boot system and boot windows using Linux boot loader(grub).
+
+GRUB
+GRUB(grand unified bootloader) is a menu-based system where we can choose which kernel or chain loader boots and also we can give direct commands from a command line.
+we can change grub config with editing /etc/default/grub file (using vim or any text editor) and then we run update-grub or for more sensitive options we can go to "/boot/grub/grub.cfg" and change it.
+also update-grub = grub-mkconfig -o /boot/grub/grub.cfg
+
+kernel boot parameters
+in above configs we send some parameters to kernel like:
+"linux /boot/vmlinuz-5.10.0-9-arm64 root=/dev/sda1 ro quiet"
+it tells kernel to run on readd-only mode and do not show lots of logs(quiet)
+other options:
+console= 		Set the console
+debug			start in debug mode
+init= 			Run an specific program instead of default init
+initrd= 		use this initrd
+ro  			mount the root file system read-only
+rw			mount the root file system read write
+root= 			use this as root file system
+selinux			disable selinux on boot
+single,Single,1,S	boot in single user mode for troubleshooting
+systemd.unit=		boot in this systemd target
+
+
+102.3 manage shared library
+
+linking
+when we write program we use libraries. there is two form of linking:
+static: we add used libraries to executable program. so we have larger program and have the advantage that program can be run without depending on attached libraries.
+dynamic: is when we just mention required libraries. this way program is smaller and more flexible and if libraries has been updated we can use of advantages to.
+
+What libraries do I need
+Libraries related to system utilities are installed in /lib and /lib64.
+
+"ldd" command
+ldd command helps you to find if program libraries are installed dynamic or static and what libraries do program using.
+
+Dynamic library configs and cache
+dynamic linking can be configured in a text file in "/etc/ld.so.conf.d"
+
+"idconfig" command
+The ldconfig commands processed all these files to make the loading of libraries faster. This command creates ld.so.cache to locate files that are
+to be dynamically loaded and linked.
+
+Where OS finds dynamic libraries
+When a program needs a shared library, the system will search files in this order:
+1. LD_LIBRARY_PATH environment variable
+2. Programs PATH
+3. /etc/ld.so.conf (Which might load more files from /etc/ld.so.conf.d/ in its beginning or its end)
+4. /lib/, /lib64/, /usr/lib/, /usr/lib64/
+In some cases, you might need to override the default system libraries. Some examples are:
+You are running an old software which needs an old version of a library.
+You are developing a shared library and want to test it without installing it
+You are running a specific program (say from opt) which needs to access its own libraries
+In these cases, you can point the environment variable LD_LIBRARY_PATH to the library you need to use and then run your program. A colon (:)
+separated list of directories will tell your program where to search for needed libraries before checking the libraries in /etc/ld.so.cache.  
