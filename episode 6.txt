@@ -1,0 +1,79 @@
+103.1 Work on command line
+We use shell to write and run commands.
+
+type
+We can use of "type" command to see what's the type of or command.
+example: When we run "type cd" system responses "cd is a shell builtin" or "type ls" we'll see "ls is aliased to `ls --color=auto'" or "type ping" is "ping is /usr/bin/ping"
+
+cd 
+We use "cd" to change directory we have to method to pass the path
+absolute path: it starts from root like: "/home/user1/lpic1/lesson3.1" 
+relative path: in this method we pass path based on where we are
+we use "~" as a character that means "home" directory.
+
+pwd
+Will show you your current directory
+
+uanme
+gives data about system
+Common switches:
+-s	Print the kernel name. This is the default if no option is specified.
+-n	Print the nodename or hostname.
+-r	Print the release of the kernel. This option is often used with module-handling commands
+-v	Print the version of the kernel.
+-m	Print the machine's hardware (CPU) name.
+-o	Print the operating system name
+-a	Print all of the above information(recommended)
+
+man
+we use man to get help and see the manual of commands even you can use "man man" command to see the manual of man command and know more about it.
+
+Special characters and Quoting/Escaping
+* ?[]'"\$;&()|^<>
+if want to type them as result we should escaoing them for example if i want to have folder named "hello world?" i should use this command:
+mkdir hello\ world\?
+
+
+Some other cases are:
+\a	Alert (bell)
+\b	Backspace
+\c	Suppress trailing newline (same function as -n option)
+\f	Form feed (clear the screen on a video display)
+\n	New line
+\r	Carriage return
+\t	Horizontal tab
+
+note:On bash you can use \ to break a command into more lines
+
+Shell environment variables
+USER		The name of the logged-in user
+PATH		List of directories to search for commands, colon separated
+EDITOR		Default editor
+HISTFILE	Where bash should save its history (normally .bash_history)
+HOSTNAME	System hostname
+PS1		The Prompt(cool to play with it)
+UID		The numeric user id of the logged-in user
+HOME		The user's home directory
+PWD		The current working directory
+SHELL		The name of the shell
+$		The process id (or PID of the running bash shell (or other) process
+PPID		The process id of the process that started this process (that is, the id of the parent process)
+?		The exit code of the last command
+
+note:When trying to access the value, you should add a $ to the beginning of the variable name
+
+PATH
+When you issue a command, bash will run if it's an internal bash command. Otherwise, bash will go and check the PATH variables one by one and
+will try to find them there. If not, it will give you an error. If you want to run something on a specific path, you have to exclusively describe the
+location
+
+command history
+Bash saves its history in ~/.bash_history. You can cat it and see its contents or run the history command. You can also use the below keys
+(combinations) to access your previous commands:
+Up and Down Arrow	Move in the history
+Ctrl+R			Backward Search
+Ctrl+O			Run the command you found with Ctrl+R
+!!			Run the last command
+!10			Run command number 10
+!text			search backward for text, and run the first found command
+
