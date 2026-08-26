@@ -1,0 +1,57 @@
+103.2 Process text streams using filters
+In Linux world we have three type of data flow:
+name				 file description
+stdin "standard input"	  	  0
+stdout "standard output"	  1
+stderr "standard error"		  2
+example
+Redirecting stdout:
+bash:
+ls > filelist.txt        # write output to a file (overwrite)
+ls >> filelist.txt       # append output to a file
+
+Redirecting stderr:
+bash:
+command 2> errors.log    # send only error messages to a file
+
+Redirecting both:
+command > output.log 2>&1    # stdout to file, then stderr follows stdout
+command &> all.log           # shorthand for the same thing (bash)
+
+Discarding output (a very common trick):
+command > /dev/null 2>&1     # silence everything
+note: run this command, but don't show me anything it prints — neither normal output nor errors.
+
+viewing command
+cat
+This command simply output its input. When we don't give input it will read form keyboard.
+bash:
+cat mydata #it reads mydata file and print it in terminal
+We can also give it more than one input filename.
+bash:
+cat mydata directory_data #It shows mydata file and hten shows directory_data
+
+bzcat, xzcat, zcat, gzcat
+There are used for directly cat the .bz, .xz, .z and .gz files. It allows us to see contents of compressed files without decompressing it.
+
+less
+A powerful tool to view large text files. It can paginate, search and move in text files.
+less common commands 
+q 	exit
+/	search for example /foo search for "foo"
+n	Next(search)
+N	previous(search)
+?	search backward for example ?foo search backward for "foo"
+G	go to end
+nG	go to line n
+
+od
+This command _dump_s files (Shows files in formats other than text). Normal behavior is OctalDump (showing in base 8)
+bash:
+ od mydata #it will shows "0000000 062564 072163 072012 064550 020163 071551 072040 062550 0000020 071440 061545 067543 062156 066040 067151 005145 074542 0000040 005145 0000042" 
+
+for better view we use switches:
+-t	will tell you to use which format for example: "-t a showing only named characters" and "-t c for showing escaped chars."
+-A	for choosing how to present offset fields for example : "-A d" for decimal and "-A o" for octal and "-A x" for hex "-A n" for None.
+
+note: od is very useful to find problems in your text files - Say finding out if you are using tabs or correct line endings.
