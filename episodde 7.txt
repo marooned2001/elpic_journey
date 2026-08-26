@@ -55,3 +55,9 @@ for better view we use switches:
 -A	for choosing how to present offset fields for example : "-A d" for decimal and "-A o" for octal and "-A x" for hex "-A n" for None.
 
 note: od is very useful to find problems in your text files - Say finding out if you are using tabs or correct line endings.
+
+Choosing parts of file
+
+split
+will split the file to smaller files. It's very useful for transforming files on smaller media. for example splitting a 3TB file into 8GB files and moving them using a USB disk.
+
