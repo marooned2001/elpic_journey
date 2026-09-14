@@ -60,4 +60,11 @@ Choosing parts of file
 
 split
 will split the file to smaller files. It's very useful for transforming files on smaller media. for example splitting a 3TB file into 8GB files and moving them using a USB disk.
-
+split switches:
+-l N		split every N lines e.g: -l 500
+-b SIZE 	split by size e.g: -b 10M, -b 1G
+-n N		split to exactly N part
+-d 		use numeric suffixes
+-a N 		suffix length
+pattern:
+split [option] input-file [prefix]		
